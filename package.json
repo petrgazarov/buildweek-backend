@@ -1,0 +1,47 @@
+{
+  "name": "build-week-pintereach",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Lambda School",
+  "scripts": {
+    "server": "nodemon",
+    "start": "node index.js",
+    "rollback-test": "npx knex migrate:rollback --env=testing",
+    "migrate-test": "npx knex migrate:latest --env=testing",
+    "seed-test": "npx knex seed:run --env=testing",
+    "pretest": "npm run rollback-test && npm run migrate-test && npm run seed-test",
+    "test": "cross-env DB_ENV=testing jest --verbose --forceExit"
+  },
+  "jest": {
+    "testEnvirnoment": "node"
+  },
+  "engines": {
+    "node": "10.15.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Liliana-Leyva/buildweek-backend.git"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "heroku": "^7.54.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.95.6",
+    "migrate": "^1.7.0",
+    "morgan": "^1.10.0",
+    "node-pre-gyp": "^0.11.0",
+    "nodemon": "^2.0.7",
+    "pg": "^8.6.0",
+    "seed": "^0.4.4",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.28.0"
+  }
+}
