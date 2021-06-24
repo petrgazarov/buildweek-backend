@@ -8,7 +8,7 @@ server.use(helmet())
 server.use(cors());
 server.use(express.json())
 
-server.use('./', usersRouter)
+server.use('/', usersRouter)
 server.use('/api/register',usersRouter)
 server.use('/api/login', usersRouter)
 
