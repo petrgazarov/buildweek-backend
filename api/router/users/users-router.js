@@ -47,11 +47,11 @@ router.post("/api/register", checkCredentials, (req, res,next) =>{
 
 	Users.add(user)
     .then(user => {
-		// const token = authenticateToken(user);
+		const token = authenticateToken(user);
       res.status(201).json({
 
         message: `Great to have you, ${user.username}`,
-        // token
+        token
       });
     })
     .catch(next); // our custom err handling middleware in server.js will trap this
