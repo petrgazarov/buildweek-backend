@@ -58,7 +58,7 @@ router.post("/api/register", checkCredentials, (req, res,next) =>{
 })
 
 
-router.post("/api/login", async (req, res) => {
+router.post("/api/login",checkCredentials, async (req, res) => {
 	let { username, password } = req.body;
 	try {
 	  const user = await Users.findBy({ username }).first();
