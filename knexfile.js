@@ -1,46 +1,29 @@
-const dbConnection = process.env.DATABASE_URL;
-
+const sharedConfig = {
+  client: 'sqlite3',
+  useNullAsDefault: true,
+  migrations: {
+      directory: './data/migrations',
+  },
+  seeds: {
+      directory: './data/seeds',
+  },
+  pool: {
+      afterCreate: (conn, done) => {
+          conn.run('PRAGMA foreign_keys = ON', done);
+      },
+  },
+};
 module.exports = {
   development: {
-    client: 'sqlite3',
-    connection: {
-      filename: './data/usersdb.db3'
-    },
-    useNullAsDefault: true, // needed for sqlite
-    migrations: {
-      directory: './data/migrations'
-    },
-    seeds: {
-      directory: './data/seeds'
-    }
+      ...sharedConfig,
+      connection: { filename: './data/usersdb.db3' },
   },
-
-  staging: {
-    client: 'postgresql',
-    connection: {
-      database: 'usersdb',
-      user: 'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations',
-      directory: './data/migrations'
-    }
+  testing: {
+      ...sharedConfig,
+      connection: { filename: './data/testing.db3' },
   },
-
   production: {
-    client: 'pg',
-    connection: dbConnection,
-    seeds: {
-      directory: './data/seeds'
-    },
-    migrations: {
-      tableName: 'knex_migrations',
-      directory: './data/migrations'
-    }
-  }
+      ...sharedConfig,
+      connection: { filename: './data/usersdb.db3' },
+  },
 };

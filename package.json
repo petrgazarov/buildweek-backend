@@ -5,7 +5,7 @@
   "author": "Lambda School",
   "engines": {
     "node": ">=12"
-},
+  },
   "scripts": {
     "server": "nodemon",
     "start": "node index.js",
