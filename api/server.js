@@ -9,9 +9,9 @@ server.use(cors());
 server.use(express.json())
 
 server.use('/', usersRouter)
-server.use('/api/register',usersRouter)
-server.use('/api/login', usersRouter)
-server.use('/api/users', usersRouter)
+// server.use('/api/register',usersRouter)
+// server.use('/api/login', usersRouter)
+// server.use('/api/users', usersRouter)
 
 server.use((err, req, res, next) => {
 	console.log(err)
