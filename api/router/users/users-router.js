@@ -47,39 +47,23 @@ router.post("/api/register", checkCredentials, (req, res,next) =>{
 
 	Users.add(user)
     .then(user => {
-		const token = authenticateToken(user);
+		// const token = authenticateToken(user);
       res.status(201).json({
 
         message: `Great to have you, ${user.username}`,
-        token
+        // token
       });
     })
     .catch(next); // our custom err handling middleware in server.js will trap this
 })
 
-// router.post("/api/login", checkCredentials, (req, res, next)=>{
-// 	let { username, password } = req.body;
 
-//   Users.findBy({ username: username }) // it would be nice to have middleware do this
-//     .then(([user]) => {
-//       if (user && bcrypt.compareSync(password, user.password)) {
-//         const token = authenticateToken(user)
-//         res.status(200).json({
-//           message: `Welcome back ${user.username}!`,
-//           token
-//         });
-//       } else {
-//         res.status(401).json({ message: 'Invalid Credentials' });
-//       }
-//     })
-//     .catch(next);
-// })
 router.post("/api/login", async (req, res) => {
 	let { username, password } = req.body;
 	try {
 	  const user = await Users.findBy({ username }).first();
 	  if (user && bcrypt.compareSync(password, user.password)) {
-		const token = generateToken(user);
+		const token = authenticateToken(user);
 		res.status(200).json({
 		  message: `Welcome back: ${user.username}!`,
 		  token
