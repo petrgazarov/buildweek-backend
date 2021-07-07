@@ -14,10 +14,10 @@ async function add(user) {
     const [id] = await db("users").insert(user);
     return findById(id);
   }
-  
-  function findBy(username) {
+
+  function findBy({ username }) {
     return db("users as u")
-      .select("u.id", "u.username")
+      .select("u.id", "u.username", "u.password")
       .where("u.username", username);
   }
   
